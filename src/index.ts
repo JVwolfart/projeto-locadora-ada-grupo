@@ -20,15 +20,15 @@ try {
     console.log("Erro ao carregar os dados");
 }
 
-console.log(
-    figlet.textSync(`   ${'RENT A CAR'}`, {
-      font: "Standard",
-      horizontalLayout: "full",
-      verticalLayout: "default",
-      width: 100,
-      whitespaceBreak: true,
-    })
-  );
+let teste = figlet.textSync(`   ${'RENT A CAR'}`, {
+    font: "Standard",
+    horizontalLayout: "full",
+    verticalLayout: "default",
+    width: 100,
+    whitespaceBreak: true,
+
+  })
+console.log(teste.red);
 
 const menu = `
     ${"*****************************************************************************".bgWhite.magenta}
