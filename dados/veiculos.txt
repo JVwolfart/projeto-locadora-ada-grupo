@@ -1,0 +1,233 @@
+[
+     {
+          "id": 1,
+          "modelo": "ONIX",
+          "placa": "AAA0001",
+          "valorDiaria": 100,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 2,
+          "modelo": "HONDA TITAN",
+          "placa": "BBB0001",
+          "valorDiaria": 50,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 3,
+          "modelo": "GOL",
+          "placa": "AAA0002",
+          "valorDiaria": 90,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": false,
+          "alugadoPara": 1,
+          "baixado": false,
+          "dataUltimaLocacao": "2023-11-02T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-09T00:00:00.000Z"
+     },
+     {
+          "id": 4,
+          "modelo": "FIAT PALIO",
+          "placa": "AAA0003",
+          "valorDiaria": 95,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 5,
+          "modelo": "HONDA BIS",
+          "placa": "BBB0002",
+          "valorDiaria": 50,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": false,
+          "alugadoPara": 6,
+          "baixado": false,
+          "dataUltimaLocacao": "2023-10-18T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-10-23T00:00:00.000Z"
+     },
+     {
+          "id": 6,
+          "modelo": "COROLA",
+          "placa": "AAA0004",
+          "valorDiaria": 130,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 7,
+          "modelo": "HONDA CIVIC",
+          "placa": "AAA0005",
+          "valorDiaria": 150,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 8,
+          "modelo": "HORNET",
+          "placa": "BBB0003",
+          "valorDiaria": 100,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": false,
+          "alugadoPara": 3,
+          "baixado": false,
+          "dataUltimaLocacao": "2023-10-23T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-01T00:00:00.000Z"
+     },
+     {
+          "id": 9,
+          "modelo": "CB 500",
+          "placa": "BBB0004",
+          "valorDiaria": 150,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 10,
+          "modelo": "CBX 750",
+          "placa": "BBB0005",
+          "valorDiaria": 120,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": false,
+          "alugadoPara": 4,
+          "baixado": false,
+          "dataUltimaLocacao": "2023-10-22T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-02T00:00:00.000Z"
+     },
+     {
+          "id": 11,
+          "modelo": "FIAT UNO",
+          "placa": "AAA0006",
+          "valorDiaria": 75,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     }
+]

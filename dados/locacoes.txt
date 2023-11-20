@@ -1,0 +1,98 @@
+[
+     {
+          "id": 1,
+          "idCliente": 2,
+          "idVeiculo": 1,
+          "dataLocacao": "2023-11-01T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-11T00:00:00.000Z",
+          "dataDevolucao": "2023-11-10T00:00:00.000Z",
+          "nDias": 9,
+          "valorDiaria": 100,
+          "acrescimo": 10,
+          "finalizado": true
+     },
+     {
+          "id": 2,
+          "idCliente": 1,
+          "idVeiculo": 3,
+          "dataLocacao": "2023-11-02T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-09T00:00:00.000Z",
+          "dataDevolucao": null,
+          "nDias": null,
+          "valorDiaria": 90,
+          "acrescimo": null,
+          "finalizado": false
+     },
+     {
+          "id": 3,
+          "idCliente": 3,
+          "idVeiculo": 2,
+          "dataLocacao": "2023-10-01T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-10-15T00:00:00.000Z",
+          "dataDevolucao": "2023-10-16T00:00:00.000Z",
+          "nDias": 15,
+          "valorDiaria": 50,
+          "acrescimo": 5,
+          "finalizado": true
+     },
+     {
+          "id": 4,
+          "idCliente": 6,
+          "idVeiculo": 5,
+          "dataLocacao": "2023-10-18T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-10-23T00:00:00.000Z",
+          "dataDevolucao": null,
+          "nDias": null,
+          "valorDiaria": 50,
+          "acrescimo": null,
+          "finalizado": false
+     },
+     {
+          "id": 5,
+          "idCliente": 3,
+          "idVeiculo": 8,
+          "dataLocacao": "2023-10-23T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-01T00:00:00.000Z",
+          "dataDevolucao": null,
+          "nDias": null,
+          "valorDiaria": 100,
+          "acrescimo": null,
+          "finalizado": false
+     },
+     {
+          "id": 6,
+          "idCliente": 5,
+          "idVeiculo": 4,
+          "dataLocacao": "2023-10-15T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-10-20T00:00:00.000Z",
+          "dataDevolucao": "2023-10-20T00:00:00.000Z",
+          "nDias": 5,
+          "valorDiaria": 95,
+          "acrescimo": 10,
+          "finalizado": true
+     },
+     {
+          "id": 7,
+          "idCliente": 4,
+          "idVeiculo": 10,
+          "dataLocacao": "2023-10-22T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-02T00:00:00.000Z",
+          "dataDevolucao": null,
+          "nDias": null,
+          "valorDiaria": 120,
+          "acrescimo": null,
+          "finalizado": false
+     },
+     {
+          "id": 8,
+          "idCliente": 11,
+          "idVeiculo": 11,
+          "dataLocacao": "2023-11-10T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-19T00:00:00.000Z",
+          "dataDevolucao": "2023-11-20T00:00:00.000Z",
+          "nDias": 10,
+          "valorDiaria": 75,
+          "acrescimo": 10,
+          "finalizado": true
+     }
+]

@@ -1,0 +1,12 @@
+[
+     {
+          "id": 1,
+          "tipo": "A",
+          "descricao": "Carteira para condução de motocicletas"
+     },
+     {
+          "id": 2,
+          "tipo": "B",
+          "descricao": "Carteira para condução de carros"
+     }
+]

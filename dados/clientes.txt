@@ -1,0 +1,160 @@
+[
+     {
+          "id": 1,
+          "nome": "Sheldon Cooper",
+          "cpf": "111.111.111-11",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": 3,
+          "historico": [
+               2
+          ],
+          "ativo": true
+     },
+     {
+          "id": 2,
+          "nome": "Johnny Lawrence",
+          "cpf": "222.222.222-22",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [
+               1
+          ],
+          "ativo": true
+     },
+     {
+          "id": 3,
+          "nome": "Sílvio Santos",
+          "cpf": "333.333.333-33",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": 8,
+          "historico": [
+               3,
+               5
+          ],
+          "ativo": true
+     },
+     {
+          "id": 4,
+          "nome": "Howard Wolowitz",
+          "cpf": "444.444.444-44",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": 10,
+          "historico": [
+               7
+          ],
+          "ativo": true
+     },
+     {
+          "id": 5,
+          "nome": "Chozen Toguchi",
+          "cpf": "555.555.555-55",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [
+               6
+          ],
+          "ativo": true
+     },
+     {
+          "id": 6,
+          "nome": "Rajesh Kootrapalli",
+          "cpf": "666.666.666-66",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": 5,
+          "historico": [
+               4
+          ],
+          "ativo": true
+     },
+     {
+          "id": 7,
+          "nome": "Edson Arantes do Nascimento",
+          "cpf": "777.777.777-77",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": null,
+          "historico": [],
+          "ativo": true
+     },
+     {
+          "id": 8,
+          "nome": "Leonard Hofstatder",
+          "cpf": "888.888.888-88",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [],
+          "ativo": true
+     },
+     {
+          "id": 9,
+          "nome": "Terry Silver",
+          "cpf": "999.999.999-99",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": null,
+          "historico": [],
+          "ativo": true
+     },
+     {
+          "id": 10,
+          "nome": "Celso Portiolli",
+          "cpf": "000.000.000-00",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [],
+          "ativo": true
+     },
+     {
+          "id": 11,
+          "nome": "Luciano Huck",
+          "cpf": "123.456.789-01",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [
+               8
+          ],
+          "ativo": true
+     }
+]

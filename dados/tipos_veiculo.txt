@@ -1,0 +1,22 @@
+[
+     {
+          "id": 1,
+          "tipo": "CARRO",
+          "acrescimo": 10,
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          }
+     },
+     {
+          "id": 2,
+          "tipo": "MOTO",
+          "acrescimo": 5,
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          }
+     }
+]
