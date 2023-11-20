@@ -4,6 +4,7 @@ import 'colors';
 import { carregaClientes, carregaLocacoes, carregaTiposCarteira, carregaTiposVeiculo, carregaVeiculos, salvaClientes, salvaLocacoes, salvaTiposCarteira, salvaTiposVeiculo, salvaVeiculos } from './Crud';
 import { Locadora } from './Locadora';
 import { formataCPF, validaData, validaCPF, strPData, calculaNDias, formataData, gerarFatura, } from './utils';
+var figlet = require("figlet");
 
 
 const locadora = new Locadora();
@@ -18,6 +19,16 @@ try {
 } catch (error) {
     console.log("Erro ao carregar os dados");
 }
+
+console.log(
+    figlet.textSync(`   ${'RENT A CAR'}`, {
+      font: "Standard",
+      horizontalLayout: "full",
+      verticalLayout: "default",
+      width: 100,
+      whitespaceBreak: true,
+    })
+  );
 
 const menu = `
     ${"*****************************************************************************".bgWhite.magenta}
