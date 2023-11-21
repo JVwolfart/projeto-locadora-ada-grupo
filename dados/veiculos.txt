@@ -224,7 +224,7 @@
                     "descricao": "Carteira para condução de carros"
                }
           },
-          "disponivel": false,
+          "disponivel": true,
           "alugadoPara": null,
           "baixado": false,
           "dataUltimaLocacao": null,

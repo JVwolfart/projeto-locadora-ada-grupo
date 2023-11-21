@@ -469,6 +469,7 @@ class Locadora {
     reativarVeiculo(veiculo: Veiculo){
         let indiceVeiculo = this._veiculos.indexOf(veiculo);
         this._veiculos[indiceVeiculo].baixado = false;
+        this._veiculos[indiceVeiculo].disponivel = true;
     }
 
     reativarCliente(cliente: Cliente){

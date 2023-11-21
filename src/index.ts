@@ -155,11 +155,13 @@ do {
             if(!validaData(dataLocacao)){
                 console.log("Data de locação inválida. Verifique");
                 readlineSync.question(voltar);
+                break;
             }
             let dataPrevisaoDevolucao = readlineSync.question("Digite a data prevista para devolução (formato dd/mm/aaaa): ");
             if(!validaData(dataPrevisaoDevolucao)){
                 console.log("Data prevista para devolução inválida. Verifique");
                 readlineSync.question(voltar);
+                break;
             }
             dataLocacao = strPData(dataLocacao);
             dataPrevisaoDevolucao = strPData(dataPrevisaoDevolucao);
@@ -167,6 +169,7 @@ do {
             if(nDias <= 0){
                 console.log("A data prevista para devolução não pode ser anterior ou igual a data de início da locação. Verifique");
                 readlineSync.question(voltar);
+                break;
             } else {
                 let confirma = readlineSync.question(`Deseja realmente alugar um veículo por ${nDias} dias? (S/N)`).toUpperCase();
                 while (confirma !== "S" && confirma !== "N"){
@@ -175,6 +178,7 @@ do {
                 }
                 if(confirma === "N"){
                     readlineSync.question(voltar);
+                    break;
                 } else {
                     console.log();
                     locadora.listarClientes();
@@ -196,7 +200,8 @@ do {
                         readlineSync.question(voltar);
                         break;
                     } else if(clienteLocacao.veiculoAlugado !== null){
-                        let veiculoAlugado = locadora.getVeiculoById(clienteLocacao.veiculoAlugado)
+                        let veiculoAlugado = locadora.getVeiculoById(clienteLocacao.veiculoAlugado);
+                        
                         console.log("Este cliente não pode alugar nenhum veículo no momento, pois ele já tem um veículo alugado");
                         console.log(`É necessário fazer a devolução do veículo ${veiculoAlugado.modelo} com a placa ${veiculoAlugado.placa} antes de alugar outro`);
                         readlineSync.question(voltar);
@@ -225,7 +230,6 @@ do {
                     
                 }
             }
-            break;
         case 6:
             console.log();
             let nomeCliente = readlineSync.question(`Informe o primeiro nome do cliente: `);
@@ -252,10 +256,17 @@ do {
                     let locacoesCliente = locadora.listarLocacoesPorCliente(clienteCPF.id);
                     if(!locacoesCliente){
                         console.log(`Nenhuma locação encontrada para o cliente ${clienteCPF.nome} com CPF ${clienteCPF.cpf}`);
+                        readlineSync.question(voltar);
+                        break;
                     } else {
                         console.log(locacoesCliente);
                         let idLocacao = parseInt(readlineSync.question(`Informe o id da locação a ser devolvida: `));
                         let locacao = locadora.getLocacaoById(idLocacao);
+                        if(!locacao){
+                            console.log("Id da locação não encontrado, ou inválido");
+                            readlineSync.question(voltar);
+                            break;
+                        }
                         if(locacao.idCliente !== clienteCPF.id){
                             console.log(`A locação que está tentando devolver não pertence a este CPF. Por favor confira os dados informados e reinicie o processo de devolução do veículo`);
                             readlineSync.question(voltar);
@@ -301,7 +312,7 @@ do {
                                 }
                                 if(confirma.toUpperCase() === "N"){
                                     console.log("Operação de devolução do veículo não concluída".red);
-                                    readlineSync(voltar);
+                                    readlineSync.question(voltar);
                                     break;
                                 } else {
                                     try {
@@ -321,8 +332,6 @@ do {
                     }
                 }
             }
-            console.log();
-            break;
             case 7:
                 let nomeClienteFatura = readlineSync.question(`Informe o primeiro nome do cliente: `);
                 let listaClientesFatura = locadora.listarClientesPorTermo(nomeClienteFatura);

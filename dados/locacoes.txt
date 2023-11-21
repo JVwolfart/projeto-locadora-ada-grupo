@@ -106,5 +106,17 @@
           "valorDiaria": 50,
           "acrescimo": 5,
           "finalizado": true
+     },
+     {
+          "id": 10,
+          "idCliente": 8,
+          "idVeiculo": 11,
+          "dataLocacao": "2023-11-04T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-09T00:00:00.000Z",
+          "dataDevolucao": "2023-11-10T00:00:00.000Z",
+          "nDias": 6,
+          "valorDiaria": 75,
+          "acrescimo": 10,
+          "finalizado": true
      }
 ]

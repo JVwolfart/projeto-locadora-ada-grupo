@@ -113,7 +113,9 @@
                "descricao": "Carteira para condução de carros"
           },
           "veiculoAlugado": null,
-          "historico": [],
+          "historico": [
+               10
+          ],
           "ativo": true
      },
      {
