@@ -81,6 +81,7 @@ function carregaClientes(locadora: Locadora){
         let cliente = new Cliente(nome, cpf, tipoCarteira);
         cliente.veiculoAlugado = listaClientes[i].veiculoAlugado;
         cliente.historico = listaClientes[i].historico;
+        cliente.ativo = listaClientes[i].ativo;
         locadora.clientes.push(cliente);
     }
 }

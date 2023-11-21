@@ -27,7 +27,7 @@
           "historico": [
                1
           ],
-          "ativo": true
+          "ativo": false
      },
      {
           "id": 3,
@@ -84,7 +84,7 @@
                "tipo": "A",
                "descricao": "Carteira para condução de motocicletas"
           },
-          "veiculoAlugado": 5,
+          "veiculoAlugado": null,
           "historico": [
                4
           ],
@@ -126,7 +126,9 @@
                "descricao": "Carteira para condução de motocicletas"
           },
           "veiculoAlugado": null,
-          "historico": [],
+          "historico": [
+               9
+          ],
           "ativo": true
      },
      {
@@ -140,7 +142,7 @@
           },
           "veiculoAlugado": null,
           "historico": [],
-          "ativo": true
+          "ativo": false
      },
      {
           "id": 11,

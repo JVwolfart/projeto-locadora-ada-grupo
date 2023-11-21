@@ -41,11 +41,11 @@
           "idVeiculo": 5,
           "dataLocacao": "2023-10-18T00:00:00.000Z",
           "dataPrevistaDevolucao": "2023-10-23T00:00:00.000Z",
-          "dataDevolucao": null,
-          "nDias": null,
+          "dataDevolucao": "2023-10-25T00:00:00.000Z",
+          "nDias": 7,
           "valorDiaria": 50,
-          "acrescimo": null,
-          "finalizado": false
+          "acrescimo": 5,
+          "finalizado": true
      },
      {
           "id": 5,
@@ -93,6 +93,18 @@
           "nDias": 10,
           "valorDiaria": 75,
           "acrescimo": 10,
+          "finalizado": true
+     },
+     {
+          "id": 9,
+          "idCliente": 9,
+          "idVeiculo": 2,
+          "dataLocacao": "2023-11-15T00:00:00.000Z",
+          "dataPrevistaDevolucao": "2023-11-16T00:00:00.000Z",
+          "dataDevolucao": "2023-11-20T00:00:00.000Z",
+          "nDias": 5,
+          "valorDiaria": 50,
+          "acrescimo": 5,
           "finalizado": true
      }
 ]

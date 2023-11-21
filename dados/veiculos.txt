@@ -14,9 +14,9 @@
                     "descricao": "Carteira para condução de carros"
                }
           },
-          "disponivel": true,
+          "disponivel": false,
           "alugadoPara": null,
-          "baixado": false,
+          "baixado": true,
           "dataUltimaLocacao": null,
           "dataPrevistaDevolucao": null
      },
@@ -98,11 +98,11 @@
                     "descricao": "Carteira para condução de motocicletas"
                }
           },
-          "disponivel": false,
-          "alugadoPara": 6,
+          "disponivel": true,
+          "alugadoPara": null,
           "baixado": false,
-          "dataUltimaLocacao": "2023-10-18T00:00:00.000Z",
-          "dataPrevistaDevolucao": "2023-10-23T00:00:00.000Z"
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
      },
      {
           "id": 6,
@@ -140,9 +140,9 @@
                     "descricao": "Carteira para condução de carros"
                }
           },
-          "disponivel": true,
+          "disponivel": false,
           "alugadoPara": null,
-          "baixado": false,
+          "baixado": true,
           "dataUltimaLocacao": null,
           "dataPrevistaDevolucao": null
      },
@@ -182,9 +182,9 @@
                     "descricao": "Carteira para condução de motocicletas"
                }
           },
-          "disponivel": true,
+          "disponivel": false,
           "alugadoPara": null,
-          "baixado": false,
+          "baixado": true,
           "dataUltimaLocacao": null,
           "dataPrevistaDevolucao": null
      },
@@ -224,7 +224,7 @@
                     "descricao": "Carteira para condução de carros"
                }
           },
-          "disponivel": true,
+          "disponivel": false,
           "alugadoPara": null,
           "baixado": false,
           "dataUltimaLocacao": null,

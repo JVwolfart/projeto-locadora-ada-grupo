@@ -60,7 +60,22 @@ class Locadora {
 
     getClienteById(id: number){
         const cliente =  this._clientes.find(cliente => cliente.id === id);
+        if(!cliente){
+            return null;
+        }
         if(cliente.ativo){
+            return cliente;
+        } else {
+            return null;
+        }
+    }
+
+    getClienteInativoById(id: number){
+        const cliente =  this._clientes.find(cliente => cliente.id === id);
+        if(!cliente){
+            return null;
+        }
+        if(!cliente.ativo){
             return cliente;
         } else {
             return null;
@@ -73,7 +88,22 @@ class Locadora {
 
     getVeiculoById(id: number){
         const veiculo = this._veiculos.find(veiculo => veiculo.id === id);
+        if(!veiculo){
+            return null;
+        }
         if(veiculo.baixado){
+            return null;
+        } else {
+            return veiculo;
+        }
+    }
+
+    getVeiculoBaixadoById(id: number){
+        const veiculo = this._veiculos.find(veiculo => veiculo.id === id);
+        if(!veiculo){
+            return null;
+        }
+        if(!veiculo.baixado){
             return null;
         } else {
             return veiculo;
@@ -170,7 +200,8 @@ class Locadora {
     }
 
     listaVeiculos(){
-        if(this._veiculos.length === 0){
+        let veiculos = this._veiculos.filter(veiculo => !veiculo.baixado);
+        if(veiculos.length === 0){
             console.log("Nenhum veículo cadastrado no momento");
         } else {
             console.log("Segue abaixo todos os veículos cadastrados no sistema: ");
@@ -178,7 +209,7 @@ class Locadora {
                 head: ["ID", "PLACA", "MODELO", "HABILITAÇÃO", "VALOR DIÁRIA", "DISPONÍVEL"],
                 colWidths: [5, 10, 15, 15, 15, 15]
             })
-            for (const veiculo of this._veiculos) {
+            for (const veiculo of veiculos) {
                 let valorDiaria = "R$" + veiculo.valorDiaria.toFixed(2);
                 let disponivel = veiculo.disponivel ? "DISPONÍVEL".green : "INDISPONÍVEL".red;
                 tabela.push([veiculo.id, veiculo.placa, veiculo.modelo, veiculo.tipoVeiculo.tipoCarteira.tipo, valorDiaria, disponivel])
@@ -188,8 +219,28 @@ class Locadora {
         }
     }
 
+    listaTodosVeiculos(){
+        if(this._veiculos.length === 0){
+            console.log("Nenhum veículo cadastrado no momento");
+        } else {
+            console.log("Segue abaixo todos os veículos cadastrados no sistema: ");
+            const tabela = new Table({
+                head: ["ID", "PLACA", "MODELO", "HABILITAÇÃO", "VALOR DIÁRIA", "DISPONÍVEL", "BAIXADO"],
+                colWidths: [5, 10, 15, 15, 15, 15, 15]
+            })
+            for (const veiculo of this._veiculos) {
+                let valorDiaria = "R$" + veiculo.valorDiaria.toFixed(2);
+                let disponivel = veiculo.disponivel ? "DISPONÍVEL".green : "INDISPONÍVEL".red;
+                let baixado = veiculo.baixado ? "SIM".red : "NÃO".green;
+                tabela.push([veiculo.id, veiculo.placa, veiculo.modelo, veiculo.tipoVeiculo.tipoCarteira.tipo, valorDiaria, disponivel, baixado])
+            }
+            console.log(tabela.toString());
+            
+        }
+    }
+
     listaVeiculosPorTipoCarteira(tipoCarteira: TipoCarteira){
-        const veiculos = this.veiculos.filter(veiculo => veiculo.tipoVeiculo.tipoCarteira === tipoCarteira);
+        const veiculos = this.veiculos.filter(veiculo => veiculo.tipoVeiculo.tipoCarteira === tipoCarteira && !veiculo.baixado);
         if(veiculos.length === 0){
             console.log("Nenhum veículo disponível pra este tipo de habilitação");
         } else {
@@ -207,6 +258,12 @@ class Locadora {
         }
     }
 
+    baixarVeiculo(veiculo: Veiculo){
+        let indiceVeiculo = this._veiculos.indexOf(veiculo);
+        this._veiculos[indiceVeiculo].baixado = true;
+        this._veiculos[indiceVeiculo].disponivel = false;
+    }
+
     cadastrarCliente(nome: string, cpf: string, tipoCarteiraId: number){
         if(!nome || !cpf || !tipoCarteiraId){
             throw new Error("Para cadastrar um cliente, deve ser informado nome, CPF e tipo de carteira");
@@ -222,7 +279,8 @@ class Locadora {
     }
 
     listarClientes(){
-        if(this._clientes.length === 0){
+        let clientes = this._clientes.filter(cliente => cliente.ativo);
+        if(clientes.length === 0){
             console.log("Nenhum cliente cadastrado no momento");
         } else {
             console.log("Segue abaixo todos os clientes cadastrados no sistema: ");
@@ -230,7 +288,7 @@ class Locadora {
                 head: ["ID", "NOME", "CPF", "HABILITAÇÃO", "AGUARDANDO DEVOLUÇÃO DE VEÍCULO", "ATIVO"],
                 colWidths: [5, 40, 20, 15, 35, 10]
             });
-            for (const cliente of this._clientes) {
+            for (const cliente of clientes) {
                 let veiculoAlugado = cliente.veiculoAlugado !== null ? "SIM".red : "NÃO".green;
                 let ativo = cliente.ativo ? "SIM".green : "NÃO".red;
                 tabela.push([cliente.id, cliente.nome, cliente.cpf, cliente.tipoCarteira.tipo, veiculoAlugado, ativo])
@@ -257,10 +315,9 @@ class Locadora {
         }
     }
 
-    removerCliente(id: number){
-        const cliente = this.getClienteById(id);
-        const indexCliente = this._clientes.indexOf(cliente);
-        this._clientes.splice(indexCliente, 1);
+    removerCliente(cliente: Cliente){
+        let indiceCliente = this._clientes.indexOf(cliente);
+        this._clientes[indiceCliente].ativo = false;
     }
 
     registrarLocacao(idCliente: number, idVeiculo: number, dataLocacao: Date, dataPrevistaDevolucao: Date){
@@ -268,6 +325,10 @@ class Locadora {
             throw new Error("Data de locação, previsão de devolução, id do cliente e id do veículo precisam ser informados");
         }
         const veiculo = this.getVeiculoById(idVeiculo);
+        if (!veiculo) {
+            throw new Error("Id do veículo informado é inválido, pois o veículo não existe ou já foi baixado");
+            
+        }
         const indiceVeiculo = this.veiculos.indexOf(veiculo);
         const cliente = this.getClienteById(idCliente);
         const indiceCliente = this.clientes.indexOf(cliente);
@@ -366,6 +427,53 @@ class Locadora {
             }
             return tabela.toString();
         }
+    }
+
+    listaVeiculosBaixados(){
+        const veiculos = this._veiculos.filter(veiculo => veiculo.baixado);
+        if (veiculos.length === 0) {
+            return "Não existem veículos baixados neste momento";
+        } else {
+            console.log("Segue abaixo todos os veículos baixados no sistema: ");
+            const tabela = new Table({
+                head: ["ID", "PLACA", "MODELO", "HABILITAÇÃO", "VALOR DIÁRIA", "SITUAÇÃO"],
+                colWidths: [5, 10, 15, 15, 15, 20]
+            })
+            for (const veiculo of veiculos) {
+                let valorDiaria = "R$" + veiculo.valorDiaria.toFixed(2);
+                let situacao = "VEÍCULO BAIXADO".red;
+                tabela.push([veiculo.id, veiculo.placa, veiculo.modelo, veiculo.tipoVeiculo.tipoCarteira.tipo, valorDiaria, situacao])
+            }
+            return tabela.toString();
+        }
+    }
+
+    listaClientesInativos(){
+        const clientesInativos = this._clientes.filter(cliente => !cliente.ativo);
+        if(clientesInativos.length === 0){
+            return `Nenhum cliente inativo no momento`;
+        } else {
+            console.log(`Segue abaixo todos os clientes inativos no sistema`);
+            const tabela = new Table({
+                head: ["ID", "CPF", "NOME", "HABILITAÇÃO", "SITUAÇÃO"],
+                colsWidth: [5, 20, 150, 15, 20]
+            })
+            for (const cliente of clientesInativos) {
+                let situacao = "INATIVO/REMOVIDO".red;
+                tabela.push([cliente.id, cliente.cpf, cliente.nome, cliente.tipoCarteira.tipo, situacao]);
+            }
+            return tabela.toString();
+        }
+    }
+
+    reativarVeiculo(veiculo: Veiculo){
+        let indiceVeiculo = this._veiculos.indexOf(veiculo);
+        this._veiculos[indiceVeiculo].baixado = false;
+    }
+
+    reativarCliente(cliente: Cliente){
+        let indiceCliente = this._clientes.indexOf(cliente);
+        this._clientes[indiceCliente].ativo = true;
     }
 }
 

@@ -4,6 +4,7 @@ import 'colors';
 import { carregaClientes, carregaLocacoes, carregaTiposCarteira, carregaTiposVeiculo, carregaVeiculos, salvaClientes, salvaLocacoes, salvaTiposCarteira, salvaTiposVeiculo, salvaVeiculos } from './Crud';
 import { Locadora } from './Locadora';
 import { formataCPF, validaData, validaCPF, strPData, calculaNDias, formataData, gerarFatura, } from './utils';
+import { validaClienteParaDesativar, validaClienteParaReativar, validaVeiculoParaBaixa, validaVeiculoParaReativar } from './auxiliar';
 var figlet = require("figlet");
 
 
@@ -43,16 +44,17 @@ const menu = `
                         6 - Registrar devolução (JV FEITO)
                         7 - Emitir fatura cliente por CPF (JV FEITO)
                         8 - Emitir fatura por id (JV FEITO)
-                        9 - Reativar veículo
-                        10 - Reativar cliente
-                        11 - Listar todos os veículos
-                        12 - Listar veículos disponíveis
-                        13 - Listar veículos indisponíveis (em locação)
-                        14 - Listar veículos baixados (removidos)
-                        15 - Listar clientes inativos (removidos)
-                        16 - Remover/dar baixa em veículo
-                        17 - Remover/inativar cliente
-                        18 - Histórico de locações do cliente
+                        9 - Remover/dar baixa em veículo (JV FEITO)
+                        10 - Remover/inativar cliente (JV FEITO)
+                        11 - Reativar veículo (JV FEITO)
+                        12 - Reativar cliente (JV FEITO)
+                        13 - Listar todos os veículos (exceto baixados) (FEITO JV PRI)
+                        14 - Listar veículos disponíveis (PRI)
+                        15 - Listar veículos indisponíveis (em locação) (PRI)
+                        16 - Listar veículos baixados (removidos) (PRI)
+                        17 - Listar clientes inativos (removidos) (PIETRA)
+                        18 - Histórico de locações de clientes ativos (PIETRA)
+                        19 - Histórico de locações de clientes inativos (PIETRA)
                         0 - Sair do sistema
 `
 
@@ -180,9 +182,9 @@ do {
                     let idClienteLocacao = parseInt(readlineSync.question("Informe o id do cliente que deseja alugar um veículo: "));
                     let clienteLocacao = locadora.getClienteById(idClienteLocacao);
                     while(!clienteLocacao){
-                        console.log("Id do cliente não encontrado!");
-                        console.log();
                         locadora.listarClientes();
+                        console.log();
+                        console.log("Id do cliente não encontrado!");
                         console.log();
                         idClienteLocacao = parseInt(readlineSync.question("Informe o id do cliente que deseja alugar um veículo (ou digite 0 para retornar ao menu): "));
                         if(idClienteLocacao === 0){
@@ -391,6 +393,97 @@ do {
                         break
                     }
                 }
+            case 9:
+                console.log();
+                locadora.listaTodosVeiculos();
+                console.log();
+                let idVeiculo = parseInt(readlineSync.question("Informe o id do veículo que deseja dar baixa: "));
+                let veiculo = locadora.getVeiculoById(idVeiculo);
+                if(!veiculo){
+                    console.log("Id do veículo não encontrado, ou inválido");
+                    readlineSync.question(voltar);
+                    break;
+                }
+                let veiculoValido = validaVeiculoParaBaixa(veiculo);
+                if(!veiculoValido){
+                    console.log("O id informado não é válido, ou o veículo já se encontra baixado, ou está alugado. Verifique a situação e tente novamente");
+                    readlineSync.question(voltar);
+                    break;
+                } else {
+                    locadora.baixarVeiculo(veiculo);
+                    console.log(`Veículo ${veiculo.modelo} com placa ${veiculo.placa} baixado com sucesso! Não é mais possível alugar este veículo`.red);
+                    readlineSync.question(voltar);
+                    break;
+                }
+            case 10:
+                console.log();
+                locadora.listarClientes();
+                console.log();
+                let idCliente = parseInt(readlineSync.question("Informe o id do cliente que deseja desativar: "));
+                let cliente = locadora.getClienteById(idCliente);
+                if(!cliente){
+                    console.log("Id do cliente não encontrado, ou inválido");
+                    readlineSync.question(voltar);
+                    break;
+                }
+                let clienteValido = validaClienteParaDesativar(cliente);
+                if(!clienteValido){
+                    console.log("O id informado não é válido, ou o cliente já se encontra desativado, ou possui pendências que impedem que seja desativado (veículo alugado e não devolvido). Verifique a situação e tente novamente");
+                    readlineSync.question(voltar);
+                    break;
+                } else {
+                    locadora.removerCliente(cliente);
+                    console.log(`Cliente ${cliente.nome} com CPF ${cliente.cpf} desativado com sucesso! Não é mais possível alugar veículos para este cliente`.red);
+                    readlineSync.question(voltar);
+                    break;
+                }
+            case 11:
+                console.log();
+                console.log(locadora.listaVeiculosBaixados());
+                console.log();
+                let idVeiculoReativar = parseInt(readlineSync.question("Informe o id do veículo a ser reativado: "));
+                let veiculoReativar = locadora.getVeiculoBaixadoById(idVeiculoReativar);
+                let veiculoValidoReativar = validaVeiculoParaReativar(veiculoReativar);
+                if(!veiculoValidoReativar){
+                    console.log("ERRO! Id do veículo não encontrado, ou inválido, ou veículo não está baixado. Verifique");
+                } else {
+                    locadora.reativarVeiculo(veiculoReativar);
+                    console.log(`Veículo ${veiculoReativar.modelo} com placa ${veiculoReativar.placa} reativado com sucesso! Já é possível realizar locações deste veículo`.green);
+                }
+                readlineSync.question(voltar);
+                break;
+            case 12:
+                console.log();
+                console.log(locadora.listaClientesInativos());
+                console.log();
+                let idClienteReativar = parseInt(readlineSync.question("Informe o id do cliente que deseja reativar: "))
+                let clienteReativar = locadora.getClienteInativoById(idClienteReativar);
+                let clienteValidoReativar = validaClienteParaReativar(clienteReativar);
+                if(!clienteValidoReativar){
+                    console.log("ERRO! Id do cliente não encontrado, ou inválido, ou cliente já está ativo. Verifique");
+                } else {
+                    locadora.reativarCliente(clienteReativar);
+                    console.log(`Cliente ${clienteReativar.nome} com CPF ${clienteReativar.cpf} reativado com sucesso! Já é possível alugar veículos para este cliente`.green);
+                }
+                readlineSync.question(voltar);
+                break;
+            case 13:
+                console.log();
+                locadora.listaVeiculos();
+                readlineSync.question(voltar);
+                break;
+            case 14: // PRI
+                break;
+            case 15: // PRI
+                break;
+            case 16: // PRI
+                break;
+            case 17: // PIETRA
+                break;
+            case 18: // PIETRA
+                break;
+            case 19: // PIETRA
+                break;
         default:
             break;
     }
