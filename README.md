@@ -16,9 +16,9 @@ Dannyel Kayke
 
 Rafael Costa
 
-Sistema de locadora de veículos.
+## Sistema de locadora de veículos.
 
-O desafio consiste no seguinte:
+### O desafio consiste no seguinte:
 
 Desenvolvimento de Sistema para Locadora de Veículos
 
@@ -27,7 +27,7 @@ A equipe, composta por no mínimo 2 e no máximo 4 integrantes, foi contratada p
 programação TypeScript, ou no máximo JavaScript Vanilla, permitindo uma interface via terminal ou qualquer interface gráfica.
 
 
-Regras de Negócio Estabelecidas pelo Cliente:
+### Regras de Negócio Estabelecidas pelo Cliente:
 
 Cadastro de Veículos:
 
@@ -78,7 +78,7 @@ zipado.
 •Observação: Certifique-se de seguir as boas práticas de desenvolvimento, documentação
 adequada e teste do código antes da entrega.
 
-Como o nosso grupo desenvolveu o sistema:
+## Como o nosso grupo desenvolveu o sistema:
 
 Utilizamos a linguagem de programação TypeScript, e desenvolvemos com a interface de terminal. Como nos requisitos não havia utilização de banco de dados, optamos por fazer a persistência dos dados através de arquivos texto.
 
