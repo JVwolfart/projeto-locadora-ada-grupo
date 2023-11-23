@@ -195,6 +195,7 @@ Bibliotecas utilizadas no sistema:
     "@types/node": "20.9.2",
     "typescript": "5.2.2"
   },
+  
   "dependencies": {
     "cli-table": "0.3.11",
     "colors": "1.4.0",
