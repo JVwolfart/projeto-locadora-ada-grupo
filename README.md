@@ -1,5 +1,18 @@
 # projeto-locadora-ada-grupo
 
+# Turma 1090 Vem Ser Tech Back End Ada iFood
+
+## Integrantes do grupo
+
+João Vitor Wolfart
+Priscilla de Araújo
+Pietra Almeida
+
+## Professores
+
+Dannyel Kayke
+Rafael Costa
+
 Sistema de locadora de veículos.
 
 O desafio consiste no seguinte:
