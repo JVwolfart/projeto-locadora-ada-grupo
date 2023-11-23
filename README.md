@@ -96,24 +96,43 @@ Locadora: Classe principal do sistema, que controla os dados, e a manipulação 
 Nosso sistema possui as seguintes funcionalidades:
 
 1 - Cadastrar tipo de carteira
+
 2 - Cadastrar tipo de veículo
+
 3 - Cadastrar veículo
+
 4 - Cadastrar cliente
+
 5 - Registrar locação
+
 6 - Registrar devolução
+
 7 - Emitir fatura cliente por CPF
+
 8 - Emitir fatura por id
+
 9 - Remover/dar baixa em veículo
+
 10 - Remover/inativar cliente
+
 11 - Reativar veículo
+
 12 - Reativar cliente
+
 13 - Listar todos os veículos (exceto baixados)
+
 14 - Listar veículos disponíveis
+
 15 - Listar veículos indisponíveis (em locação)
+
 16 - Listar veículos baixados (removidos)
+
 17 - Listar clientes inativos (removidos)
+
 18 - Histórico de locações de clientes ativos
+
 19 - Histórico de locações de clientes inativos
+
 0 - Sair do sistema
 
 Optamos por não fazer a exclusão de veículos e clientes, para assim poder persistir um histórico.
