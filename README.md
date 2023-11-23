@@ -69,12 +69,17 @@ Entrega do Projeto:
 
 •O código fonte do projeto deve ser desenvolvido em TypeScript ou, no máximo, em JavaScript
 Vanilla.
+
 •A interface pode ser implementada via terminal ou qualquer interface gráfica (HTML e CSS, por
 exemplo).
+
 •A equipe deve ser composta por no mínimo 2 e no máximo 4 integrantes.
+
 •O código deve ser entregue via link de repositório remoto (por exemplo, GitHub) ou em arquivo
 zipado.
+
 •A entrega deve ser feita através do sistema escolar LMS designado para este curso.
+
 •Observação: Certifique-se de seguir as boas práticas de desenvolvimento, documentação
 adequada e teste do código antes da entrega.
 
