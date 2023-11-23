@@ -3,6 +3,7 @@ import { Locacao } from "../Locacao";
 import { TipoCarteira } from "../TipoCarteira";
 import { TipoVeiculo } from "../TipoVeiculo";
 import { Veiculo } from "../Veiculo";
+import { getVeiculoHistorico } from "../relatórios";
 import { formataCPF, formataData, validaCPF } from "../utils";
 var Table = require('cli-table');
 
@@ -68,6 +69,14 @@ class Locadora {
         } else {
             return null;
         }
+    }
+
+    getClienteByIdTodos(id: number){
+        const cliente =  this._clientes.find(cliente => cliente.id === id);
+        if(!cliente){
+            return null;
+        }
+        return cliente;
     }
 
     getClienteInativoById(id: number){
@@ -403,8 +412,8 @@ class Locadora {
                 colWidths: [10, 20, 20, 15, 20, 20, 15]
             })
             for (const locacao of locacoesFinalizadas) {
-                let veiculo = this.getVeiculoById(locacao.idVeiculo);
-                let cliente = this.getClienteById(locacao.idCliente);
+                let veiculo = getVeiculoHistorico(this, locacao.idVeiculo);
+                let cliente = this.getClienteByIdTodos(locacao.idCliente);
                 tabela.push([locacao.id, cliente.nome, veiculo.modelo, veiculo.placa, formataData(locacao.dataLocacao), formataData(locacao.dataDevolucao), locacao.nDias])
             }
             return tabela.toString();
@@ -422,7 +431,7 @@ class Locadora {
                 colWidths: [5, 20, 15, 20, 20, 15]
             })
             for (const locacao of locacoesCliente) {
-                let veiculo = this.getVeiculoById(locacao.idVeiculo)
+                let veiculo = getVeiculoHistorico(this, locacao.idVeiculo);
                 tabela.push([locacao.id, veiculo.modelo, veiculo.placa, formataData(locacao.dataLocacao), formataData(locacao.dataDevolucao), locacao.nDias])
             }
             return tabela.toString();

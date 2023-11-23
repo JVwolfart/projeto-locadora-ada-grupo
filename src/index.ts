@@ -1,71 +1,23 @@
 import * as readlineSync from 'readline-sync';
-import * as sleep from "system-sleep"
 import 'colors';
-import { carregaClientes, carregaLocacoes, carregaTiposCarteira, carregaTiposVeiculo, carregaVeiculos, salvaClientes, salvaLocacoes, salvaTiposCarteira, salvaTiposVeiculo, salvaVeiculos } from './Crud';
 import { Locadora } from './Locadora';
-import { formataCPF, validaData, validaCPF, strPData, calculaNDias, formataData, gerarFatura, } from './utils';
+import { formataCPF, validaData, validaCPF, strPData, calculaNDias, formataData, } from './utils';
 import { validaClienteParaDesativar, validaClienteParaReativar, validaVeiculoParaBaixa, validaVeiculoParaReativar } from './auxiliar';
-var figlet = require("figlet");
-
+import { getVeiculoHistorico, historicoClientes, listaClientesInativos, listaVeiculosBaixados, listaVeiculosDisponiveis, listaVeiculosIndisponiveis } from './relatórios';
+import { menu, inicializando, finalizando, agradecimentos, inicializandoDev, finalizadoDev } from './Menu';
+import { gerarFatura } from './Fatura';
 
 const locadora = new Locadora();
 
-
-try {
-    carregaTiposCarteira(locadora);
-    carregaTiposVeiculo(locadora);
-    carregaVeiculos(locadora);
-    carregaClientes(locadora);
-    carregaLocacoes(locadora);
-} catch (error) {
-    console.log("Erro ao carregar os dados");
-}
-
-let teste = figlet.textSync(`   ${'RENT A CAR'}`, {
-    font: "Standard",
-    horizontalLayout: "full",
-    verticalLayout: "default",
-    width: 100,
-    whitespaceBreak: true,
-
-  })
-console.log(teste.red);
-
-const menu = `
-    ${"*****************************************************************************".bgWhite.magenta}
-    ${"*************          MENU DO SISTEMA RENT A CAR           *****************".bgWhite.magenta}
-    ${"*****************************************************************************".bgWhite.magenta}
-
-                        1 - Cadastrar tipo de carteira (JV FEITO)
-                        2 - Cadastrar tipo de veículo (JV FEITO)
-                        3 - Cadastrar veículo (JV FEITO)
-                        4 - Cadastrar cliente (JV FEITO)
-                        5 - Registrar locação (JV FEITO)
-                        6 - Registrar devolução (JV FEITO)
-                        7 - Emitir fatura cliente por CPF (JV FEITO)
-                        8 - Emitir fatura por id (JV FEITO)
-                        9 - Remover/dar baixa em veículo (JV FEITO)
-                        10 - Remover/inativar cliente (JV FEITO)
-                        11 - Reativar veículo (JV FEITO)
-                        12 - Reativar cliente (JV FEITO)
-                        13 - Listar todos os veículos (exceto baixados) (FEITO JV PRI)
-                        14 - Listar veículos disponíveis (PRI)
-                        15 - Listar veículos indisponíveis (em locação) (PRI)
-                        16 - Listar veículos baixados (removidos) (PRI)
-                        17 - Listar clientes inativos (removidos) (PIETRA)
-                        18 - Histórico de locações de clientes ativos (PIETRA)
-                        19 - Histórico de locações de clientes inativos (PIETRA)
-                        0 - Sair do sistema
-`
-
-
+inicializando(locadora);
+//inicializandoDev(locadora);
 
 let op: number;
 let voltar = "Pressione ENTER para voltar ao menu";
 const hoje = new Date();
 
 do {
-    console.log(menu);
+    menu();
     op = parseInt(readlineSync.question("O que você deseja fazer? "));
     switch (op) {
         case 1:
@@ -372,7 +324,7 @@ do {
                                 readlineSync.question(voltar);
                                 break;
                             } else {
-                                gerarFatura(fatura, clienteCPF, locadora.getVeiculoById(fatura.idVeiculo));
+                                gerarFatura(fatura, clienteCPF, getVeiculoHistorico(locadora, fatura.idVeiculo));
                                 console.log();
                                 readlineSync.question(voltar);
                                 break;
@@ -395,8 +347,8 @@ do {
                         readlineSync.question(voltar);
                         break
                     } else {
-                        let veiculo = locadora.getVeiculoById(fatura.idVeiculo);
-                        let cliente = locadora.getClienteById(fatura.idCliente);
+                        let veiculo = getVeiculoHistorico(locadora, fatura.idVeiculo);
+                        let cliente = locadora.getClienteByIdTodos(fatura.idCliente);
                         gerarFatura(fatura, cliente, veiculo);
                         readlineSync.question(voltar);
                         break
@@ -481,24 +433,147 @@ do {
                 locadora.listaVeiculos();
                 readlineSync.question(voltar);
                 break;
-            case 14: // PRI
+            case 14:
+                console.log();
+                console.log("Relatório dos veículos disponíveis para locação");
+                console.log();
+                if(listaVeiculosDisponiveis(locadora)){
+                    let relatorio = listaVeiculosDisponiveis(locadora);
+                    console.log(relatorio["tabela"]);
+                    console.log(`Total geral de veículos disponíveis para locação: ${relatorio["totVeiculos"]}`);
+                    for (const tipo of relatorio["qtdTipos"]) {
+                        console.log(`Total de veículos disponíveis do tipo ${tipo[0]}: ${tipo[1]}`);
+                    }
+                } else {
+                    console.log("Não existem veículos disponíveis para locação neste momento");
+                    
+                }
+                readlineSync.question(voltar);
                 break;
-            case 15: // PRI
+            case 15:
+                console.log();
+                console.log("Relatório dos veículos indisponíveis (que estão alugados)");
+                console.log();
+                if(listaVeiculosIndisponiveis(locadora)){
+                    let relatorio = listaVeiculosIndisponiveis(locadora);
+                    console.log(relatorio["tabela"]);
+                    console.log(`Total geral de veículos indisponíveis para locação: ${relatorio["totVeiculos"]}`);
+                    for (const tipo of relatorio["qtdTipos"]) {
+                        console.log(`Total de veículos indisponíveis do tipo ${tipo[0]}: ${tipo[1]}`);
+                    }
+                } else {
+                    console.log("Não existem veículos indisponíveis para locação neste momento");
+                    
+                }
+                readlineSync.question(voltar);
                 break;
             case 16: // PRI
+                console.log();
+                console.log("Relatório dos veículos baixados");
+                console.log();
+                if(listaVeiculosIndisponiveis(locadora)){
+                    let relatorio = listaVeiculosBaixados(locadora);
+                    console.log(relatorio["tabela"]);
+                    console.log(`Total geral de veículos baixados: ${relatorio["totVeiculos"]}`);
+                    for (const tipo of relatorio["qtdTipos"]) {
+                        console.log(`Total de veículos baixados do tipo ${tipo[0]}: ${tipo[1]}`);
+                    }
+                } else {
+                    console.log("Não existem veículos indisponíveis para locação neste momento");
+                    
+                }
+                readlineSync.question(voltar);
                 break;
             case 17: // PIETRA
+                console.log();
+                console.log("Relatório dos clientes inativos/cancelados");
+                console.log();
+                let relatorio = listaClientesInativos(locadora);
+                if(relatorio){
+                    console.log(relatorio.tabela);
+                    console.log(`Quantidade de clientes inativos: ${relatorio.qtdClientes}`);
+                } else {
+                    console.log("Não existe nenhum cliente inativo no momento");
+                }
+                readlineSync.question(voltar);
                 break;
-            case 18: // PIETRA
-                break;
+            case 18:
+                console.log();
+                locadora.listarClientes();
+                console.log();
+                let idClienteHistorico = parseInt(readlineSync.question("Informe o id do cliente que você deseja ver o histórico: "));
+                let clienteHistorico = locadora.getClienteById(idClienteHistorico);
+                if (!clienteHistorico) {
+                    console.log("Id do cliente não encontrado, ou inválido, ou o cliente está inativo");
+                    readlineSync.question(voltar);
+                    break;
+                } else if(clienteHistorico.historico.length === 0) {
+                    console.log(`O cliente ${clienteHistorico.nome} com CPF ${clienteHistorico.cpf} não possui nenhum histórico de locação`);
+                    readlineSync.question(voltar);
+                    break;
+                } else {
+                    console.log();
+                    let historico = historicoClientes(locadora, clienteHistorico);
+                    if(!historico){
+                        console.log(`O cliente ${clienteHistorico.nome} com CPF ${clienteHistorico.cpf} ainda não possui nenhum histórico de locação`);
+                        readlineSync.question(voltar);
+                        break;    
+                    } else {
+                        console.log(`Histórico de locação do cliente ${clienteHistorico.nome} com CPF ${clienteHistorico.cpf} e habilitação categoria ${clienteHistorico.tipoCarteira.tipo}`);
+                        console.log(historico.tabela);
+                        console.log(`Total de locações feitas pelo cliente: ${historico.totalLocacoes}`);
+                        console.log(`Quantidade geral de dias alugados: ${historico.totalNDias}`);
+                        console.log(`Total geral das diárias: ${historico.totDiarias}`);
+                        console.log(`Total geral de acréscimos/impostos: ${historico.totAcrescimo}`);
+                        console.log(`Total faturado: ${historico.totGeral}`);
+                    }
+                    readlineSync.question(voltar);
+                    break;
+                }
             case 19: // PIETRA
-                break;
+                console.log();
+                console.log(listaClientesInativos(locadora)["tabela"]);
+                console.log();
+                let idClienteInativoHistorico = parseInt(readlineSync.question("Informe o id do cliente que você deseja ver o histórico: "));
+                let clienteInativoHistorico = locadora.getClienteInativoById(idClienteInativoHistorico);
+                if (!clienteInativoHistorico) {
+                    console.log("Id do cliente não encontrado, ou inválido, ou o cliente está ativo");
+                    readlineSync.question(voltar);
+                    break;
+                } else if(clienteInativoHistorico.historico.length === 0) {
+                    console.log(`O cliente ${clienteInativoHistorico.nome} com CPF ${clienteInativoHistorico.cpf} não possui nenhum histórico de locação`);
+                    readlineSync.question(voltar);
+                    break;
+                } else {
+                    console.log();
+                    let historico = historicoClientes(locadora, clienteInativoHistorico);
+                    if(!historico){
+                        console.log(`O cliente ${clienteInativoHistorico.nome} com CPF ${clienteInativoHistorico.cpf} ainda não possui nenhum histórico de locação`);
+                        readlineSync.question(voltar);
+                        break;    
+                    } else {
+                        console.log(`Histórico de locação do cliente ${clienteInativoHistorico.nome} com CPF ${clienteInativoHistorico.cpf} e habilitação categoria ${clienteInativoHistorico.tipoCarteira.tipo}`);
+                        console.log(historico.tabela);
+                        console.log(`Total de locações feitas pelo cliente: ${historico.totalLocacoes}`);
+                        console.log(`Quantidade geral de dias alugados: ${historico.totalNDias}`);
+                        console.log(`Total geral das diárias: ${historico.totDiarias}`);
+                        console.log(`Total geral de acréscimos/impostos: ${historico.totAcrescimo}`);
+                        console.log(`Total faturado: ${historico.totGeral}`);
+                    }
+                    readlineSync.question(voltar);
+                    break;
+                }
+        case 0:
+            console.log("Até mais!".cyan);
+            break;
         default:
+            console.log("Opção informada inválida! (apenas números de 0 a 19)");
+            readlineSync.question(voltar);
             break;
     }
 } while (op !== 0);
-salvaTiposCarteira(locadora);
-salvaTiposVeiculo(locadora);
-salvaVeiculos(locadora);
-salvaClientes(locadora);
-salvaLocacoes(locadora)
+
+finalizando(locadora);
+//finalizadoDev(locadora);
+readlineSync.question("Pressione ENTER para sair do sistema");
+agradecimentos();

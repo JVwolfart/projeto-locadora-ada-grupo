@@ -38,10 +38,11 @@
                "tipo": "A",
                "descricao": "Carteira para condução de motocicletas"
           },
-          "veiculoAlugado": 8,
+          "veiculoAlugado": null,
           "historico": [
                3,
-               5
+               5,
+               11
           ],
           "ativo": true
      },
@@ -158,6 +159,34 @@
           "veiculoAlugado": null,
           "historico": [
                8
+          ],
+          "ativo": true
+     },
+     {
+          "id": 12,
+          "nome": "Ana Maria Braga",
+          "cpf": "123.456.999-00",
+          "tipoCarteira": {
+               "id": 2,
+               "tipo": "B",
+               "descricao": "Carteira para condução de carros"
+          },
+          "veiculoAlugado": null,
+          "historico": [],
+          "ativo": true
+     },
+     {
+          "id": 13,
+          "nome": "Dannyel Kayke",
+          "cpf": "123.456.543-21",
+          "tipoCarteira": {
+               "id": 1,
+               "tipo": "A",
+               "descricao": "Carteira para condução de motocicletas"
+          },
+          "veiculoAlugado": null,
+          "historico": [
+               12
           ],
           "ativo": true
      }

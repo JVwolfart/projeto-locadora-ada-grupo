@@ -14,9 +14,9 @@
                     "descricao": "Carteira para condução de carros"
                }
           },
-          "disponivel": false,
+          "disponivel": true,
           "alugadoPara": null,
-          "baixado": true,
+          "baixado": false,
           "dataUltimaLocacao": null,
           "dataPrevistaDevolucao": null
      },
@@ -162,10 +162,10 @@
                }
           },
           "disponivel": false,
-          "alugadoPara": 3,
-          "baixado": false,
-          "dataUltimaLocacao": "2023-10-23T00:00:00.000Z",
-          "dataPrevistaDevolucao": "2023-11-01T00:00:00.000Z"
+          "alugadoPara": null,
+          "baixado": true,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
      },
      {
           "id": 9,
@@ -213,6 +213,48 @@
           "id": 11,
           "modelo": "FIAT UNO",
           "placa": "AAA0006",
+          "valorDiaria": 75,
+          "tipoVeiculo": {
+               "id": 1,
+               "tipo": "CARRO",
+               "acrescimo": 10,
+               "tipoCarteira": {
+                    "id": 2,
+                    "tipo": "B",
+                    "descricao": "Carteira para condução de carros"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 12,
+          "modelo": "FASER 600",
+          "placa": "BBB0006",
+          "valorDiaria": 110,
+          "tipoVeiculo": {
+               "id": 2,
+               "tipo": "MOTO",
+               "acrescimo": 5,
+               "tipoCarteira": {
+                    "id": 1,
+                    "tipo": "A",
+                    "descricao": "Carteira para condução de motocicletas"
+               }
+          },
+          "disponivel": true,
+          "alugadoPara": null,
+          "baixado": false,
+          "dataUltimaLocacao": null,
+          "dataPrevistaDevolucao": null
+     },
+     {
+          "id": 13,
+          "modelo": "SANDERO",
+          "placa": "AAA0007",
           "valorDiaria": 75,
           "tipoVeiculo": {
                "id": 1,
